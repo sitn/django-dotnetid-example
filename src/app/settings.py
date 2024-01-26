@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.openid_connect",
+    "dotnetidprovider",
 ]
 
 MIDDLEWARE = [
@@ -105,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 SOCIALACCOUNT_PROVIDERS = {
-    "openid_connect": {
+    "dotnetidprovider": {
         "APP": {
             "provider_id": "dotnetid",
             "name": "Etat de Neuchâtel",
@@ -123,6 +124,12 @@ SOCIALACCOUNT_PROVIDERS = {
         "OAUTH_PKCE_ENABLED": True,
     }
 }
+
+LOGIN_REDIRECT_URL = 'index'
+
+ACCOUNT_LOGOUT_REDIRECT = 'index'
+
+SITE_ID = 1
 
 
 # Internationalization
