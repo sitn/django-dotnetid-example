@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  {% load socialaccount %}
+  {% if request.user.is_authenticated %}
+  <h3>Vous êtes connecté</h3>
+  <h4>WELCOME {{ request.user }}</h4>
+      button for log out
+      <a href="{% url 'account_logout' %}">Log Out</a>
+  {% else %}
+  <h3>Vous n'êtes pas connecté</h3>
+      <a href="{% provider_login_url 'openid_connect' process='login' next='/' %}">Se connecter</a>
+  {% endif %}
+</body>
+</html>
