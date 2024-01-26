@@ -121,15 +121,17 @@ SOCIALACCOUNT_PROVIDERS = {
             "openid",
             "glados",
         ],
-        "EXTRA_ATTRIBUTES": [
-            "djangoopenid.groups",
-            "djangoopenid.admin",
+        "EXTRA_ATTRIBUTES_PREFIX": "djangoopenid",
+        "EXTRA_ATTRIBUTES_NAMES": [
+            "groups",
+            "admin",
         ],
         "OAUTH_PKCE_ENABLED": True,
         "ID_TOKEN_ISSUER": os.environ['DOTNETID_SERVER_URL'],
     }
 }
 SOCIALACCOUNT_EMAIL_VERIFICATION = None
+SOCIALACCOUNT_ADAPTER  = 'dotnetidprovider.adapter.DotnetIdAccountAdapter'
 LOGIN_REDIRECT_URL = 'index'
 ACCOUNT_LOGOUT_REDIRECT = 'index'
 SITE_ID = 1

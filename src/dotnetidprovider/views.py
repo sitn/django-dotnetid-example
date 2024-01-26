@@ -18,10 +18,16 @@ ID_TOKEN_ISSUER = (
         .get("ID_TOKEN_ISSUER")
 )
 
-EXTRA_ATTRIBUTES = (
+EXTRA_ATTRIBUTES_PREFIX = (
     getattr(settings, "SOCIALACCOUNT_PROVIDERS", {})
         .get("dotnetidprovider", {})
-        .get("EXTRA_ATTRIBUTES", [])
+        .get("EXTRA_ATTRIBUTES_PREFIX", "")
+)
+
+EXTRA_ATTRIBUTES_NAMES = (
+    getattr(settings, "SOCIALACCOUNT_PROVIDERS", {})
+        .get("dotnetidprovider", {})
+        .get("EXTRA_ATTRIBUTES_NAMES", [])
 )
 
 class DotnetIdAdapter(OpenIDConnectAdapter):
@@ -57,7 +63,8 @@ class DotnetIdAdapter(OpenIDConnectAdapter):
             "sub": identity_data['sub'],
         }
 
-        for extra_attr in EXTRA_ATTRIBUTES:
+        for attr in EXTRA_ATTRIBUTES_NAMES:
+            extra_attr = f"{EXTRA_ATTRIBUTES_PREFIX}.{attr}"
             try:
                 extra_data[extra_attr] = identity_data[extra_attr]
                 
