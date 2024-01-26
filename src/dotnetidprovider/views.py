@@ -18,6 +18,12 @@ ID_TOKEN_ISSUER = (
         .get("ID_TOKEN_ISSUER")
 )
 
+EXTRA_ATTRIBUTES = (
+    getattr(settings, "SOCIALACCOUNT_PROVIDERS", {})
+        .get("dotnetidprovider", {})
+        .get("EXTRA_ATTRIBUTES", [])
+)
+
 class DotnetIdAdapter(OpenIDConnectAdapter):
     provider_id = DotnetIdProvider.id
 
@@ -41,10 +47,8 @@ class DotnetIdAdapter(OpenIDConnectAdapter):
                 audience=app.client_id,
             )
         except jwt.PyJWTError as e:
-            print(e)
             raise OAuth2Error("Invalid id_token") from e
 
-        print(identity_data)
         extra_data = {
             "email": identity_data['upn'],
             "username": identity_data['name'].replace("ACN\\", ""),
@@ -52,6 +56,13 @@ class DotnetIdAdapter(OpenIDConnectAdapter):
             "last_name": identity_data['family_name'],
             "sub": identity_data['sub'],
         }
+
+        for extra_attr in EXTRA_ATTRIBUTES:
+            try:
+                extra_data[extra_attr] = identity_data[extra_attr]
+                
+            except KeyError as e:
+                raise OAuth2Error(f"{extra_attr} is defined in settings but not present in id_token.")
         login = self.get_provider().sociallogin_from_response(request, extra_data)
         return login
 
