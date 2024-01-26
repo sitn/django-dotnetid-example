@@ -122,6 +122,7 @@ SOCIALACCOUNT_PROVIDERS = {
             "glados",
         ],
         "OAUTH_PKCE_ENABLED": True,
+        "ID_TOKEN_ISSUER": os.environ['DOTNETID_SERVER_URL'],
     }
 }
 
