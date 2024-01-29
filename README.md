@@ -32,3 +32,13 @@ Go to http://127.0.0.1:8000
 
 ⚠ Do not change docker port on local, the only allowed host registered on OpenID is `http://127.0.0.1:8000`
 
+
+### Deploy
+
+Set your `DOCKER_HOST` env.
+
+Change .env accordingly, then:
+
+```sh
+docker compose up -d --build
+```
