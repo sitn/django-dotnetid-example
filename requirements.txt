@@ -6,7 +6,7 @@ cryptography==42.0.1
 defusedxml==0.7.1
 Django==4.2.9
 django-allauth==0.60.1
-django-dotnetid @ git+https://github.com/sitn/django-dotnetid.git@828a80177f9fcdf616525b513d8ac0a474cd1ba7
+django-dotnetid @ git+https://github.com/sitn/django-dotnetid.git@891f2bca6ec8037949709729919e15d83a2c1082
 idna==3.6
 oauthlib==3.2.2
 pycparser==2.21
