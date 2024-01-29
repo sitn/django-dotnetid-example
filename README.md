@@ -5,7 +5,6 @@ A simple django project with openid working with dotnetaccess
 ## Local test
 
 ```sh
-cd src
 cp .env.sample .env
 ```
 
@@ -21,3 +20,15 @@ python manage.py runserver
 ```
 
 Go to http://127.0.0.1:8000
+
+
+### Local with Docker
+
+```sh
+docker compose up -d --build
+```
+
+Go to http://127.0.0.1:8000
+
+⚠ Do not change docker port on local, the only allowed host registered on OpenID is `http://127.0.0.1:8000`
+

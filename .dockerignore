@@ -1,0 +1,12 @@
+*.pyc
+*.pyo
+*.mo
+*.db
+*.egg-info
+.cache
+__pycache__.venv
+Dockerfile
+README.md
+venv
+.env.local
+.env.test

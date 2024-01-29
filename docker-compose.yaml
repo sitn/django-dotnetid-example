@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  back:
+    image: sitn/django-dotnetid-example
+    build:
+      context: .
+    command: "gunicorn app.wsgi -b :8000 --timeout 90"
+    restart: unless-stopped
+    ports:
+      - "${DOCKER_PORT}:8000"
+
