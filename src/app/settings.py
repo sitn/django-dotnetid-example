@@ -32,11 +32,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_dotnetid",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.openid_connect",
-    "dotnetidprovider",
 ]
 
 MIDDLEWARE = [
@@ -55,7 +55,7 @@ ROOT_URLCONF = "app.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ['app/templates'],
+        "DIRS": ["app/templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -131,7 +131,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 SOCIALACCOUNT_EMAIL_VERIFICATION = None
-SOCIALACCOUNT_ADAPTER  = 'dotnetidprovider.adapter.DotnetIdAccountAdapter'
+SOCIALACCOUNT_ADAPTER  = 'django_dotnetid.adapter.DotnetIdAccountAdapter'
 LOGIN_REDIRECT_URL = 'index'
 ACCOUNT_LOGOUT_REDIRECT = 'index'
 SITE_ID = 1
