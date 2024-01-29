@@ -42,3 +42,15 @@ Change .env accordingly, then:
 ```sh
 docker compose up -d --build
 ```
+
+If you're behind a proxy, add this to your apache conf:
+
+```conf
+<Location /apps/>
+  RequestHeader set X-Forwarded-Host "visible-host.example.com"
+  RequestHeader set X-Forwarded-Proto "https"
+  RequestHeader unset Host
+</Location>
+ProxyPass "/apps/" "http://runner.example.com:DOCKER_PORT/"
+ProxyPassReverse "/apps/"  "http://runner.example.com:DOCKER_PORT/"
+```
