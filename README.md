@@ -14,7 +14,7 @@ Then adapt the `.env` file
 python -m venv venv
 ./venv/Scripts/activate
 pip install -r requirements.txt
-cd src
+cd back
 python manage.py migrate
 python manage.py runserver
 ```

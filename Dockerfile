@@ -14,5 +14,5 @@ RUN pip3 install -r requirements.txt
 
 ENV PYTHONUNBUFFERED 1
 
-COPY ./src /app/django-dotnetid-example/
+COPY ./back /app/django-dotnetid-example/
 COPY .env /app/django-dotnetid-example/.env
