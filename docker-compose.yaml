@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   back:
     image: sitn/django-dotnetid-example
@@ -10,3 +8,11 @@ services:
     ports:
       - "${DOCKER_PORT}:8000"
 
+  apache:
+    image: httpd:2.4
+    container_name: apache-bff
+    ports:
+      - "443:443"
+    volumes:
+      - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
+      - ./apache/certs:/usr/local/apache2/conf/certs:ro

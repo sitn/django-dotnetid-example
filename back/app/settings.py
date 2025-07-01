@@ -22,6 +22,9 @@ if os.environ.get("DEBUG", False) == "True":
 
 ALLOWED_HOSTS = os.environ["ALLOWED_HOSTS"].split(",")
 CSRF_TRUSTED_ORIGINS = os.environ["CORS_ALLOWED_ORIGINS"].split(",")
+CORS_ORIGIN_WHITELIST = os.environ["CORS_ALLOWED_ORIGINS"].split(",")
+CORS_ALLOW_CREDENTIALS = True
+
 
 # Application definition
 
@@ -32,6 +35,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "corsheaders",
     "django_dotnetid",
     "allauth",
     "allauth.account",
@@ -40,6 +44,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
