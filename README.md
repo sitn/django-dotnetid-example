@@ -5,6 +5,12 @@ A simple Django project with openid working with dotnetaccess
 ## With Docker
 
 ```sh
+cp back/.env.sample back/.env 
+```
+
+Add your secrets to your `env` then
+
+```sh
 docker compose up -d
 ```
 
