@@ -1,18 +1,11 @@
 services:
   back:
-    image: sitn/django-dotnetid-example
+    build:
+      context: back
+    command: "gunicorn app.wsgi -b :8000 --timeout 90"
+
+  front:
     build:
       context: .
-    command: "gunicorn app.wsgi -b :8000 --timeout 90"
-    restart: unless-stopped
-    ports:
-      - "${DOCKER_PORT}:8000"
-
-  apache:
-    image: httpd:2.4
-    container_name: apache-bff
     ports:
       - "443:443"
-    volumes:
-      - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
-      - ./apache/certs:/usr/local/apache2/conf/certs:ro
