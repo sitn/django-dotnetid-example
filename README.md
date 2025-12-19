@@ -2,11 +2,21 @@
 
 A simple Django project with openid working with dotnetaccess
 
-## Requirements
+## With Docker
+
+```sh
+docker compose up -d
+```
+
+Then go to https://localhost
+
+## Without Docker
+
+### Requirements
 
 * openssl in order to generate certificates. Easier to use WSL if you're on Windows.
 
-## Local test
+### Backend
 
 ```sh
 cp .env.sample .env
@@ -54,37 +64,8 @@ openssl req -x509 -nodes -days 365 \
 
 Two files should appear in `apache/certs` folder.
 
-Now you can run apache in a new terminal:
-
-```sh
-docker compose up -d apache
-```
+Now you can run apache in a Docker container or copy your certification to your installation.
 
 Go to https://localhost
 
 Login should work.
-
-### Deploy
-
-In progress...
-<!--
-Set your `DOCKER_HOST` env.
-
-Change .env accordingly, then:
-
-```sh
-docker compose up -d --build
-```
-
-If you're behind a proxy, add this to your apache conf:
-
-```conf
-<Location /apps/>
-  RequestHeader set X-Forwarded-Host "visible-host.example.com"
-  RequestHeader set X-Forwarded-Proto "https"
-  RequestHeader unset Host
-</Location>
-ProxyPass "/apps/" "http://runner.example.com:DOCKER_PORT/"
-ProxyPassReverse "/apps/"  "http://runner.example.com:DOCKER_PORT/"
-```
--->
