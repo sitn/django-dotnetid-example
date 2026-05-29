@@ -1,16 +1,23 @@
-const API_USER = "https://localhost/api/user/"
+const API_URL = "https://localhost/api"
 const LOGIN_URL = "https://localhost/accounts/oidc/dotnetid/login/"
 const LOGOUT_URL = "https://localhost/accounts/logout/"
 
-export function initAuthUI(
+export async function initAuthUI(
   button: HTMLButtonElement,
   status: HTMLParagraphElement
 ) {
-  checkAuth(button, status)
+  await initCsrf();
+  checkAuth(button, status);
+}
+
+async function initCsrf() {
+  await fetch(`${API_URL}/csrf/`, {
+    credentials: "include",
+  })
 }
 
 function checkAuth(button: HTMLButtonElement, status: HTMLParagraphElement) {
-  fetch(API_USER, { credentials: "include" })
+  fetch(`${API_URL}/user/`, { credentials: "include" })
     .then(res => {
       if (res.status === 401) {
         renderLoggedOut(button, status)
