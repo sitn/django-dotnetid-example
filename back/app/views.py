@@ -18,7 +18,7 @@ def csrf(request):
     return JsonResponse({"success": True})
 
 def get_user(request):
-    if request.user.username:
+    if request.user.is_authenticated:
         return JsonResponse({
             "username": request.user.username,
         })
