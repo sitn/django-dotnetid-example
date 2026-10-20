@@ -1,13 +1,16 @@
+import { renderWhatHappened } from "./whatHappened.ts"
+
 const API_URL = "https://localhost/api"
 const LOGIN_URL = "https://localhost/accounts/oidc/dotnetid/login/"
 const LOGOUT_URL = "https://localhost/accounts/logout/"
 
 export async function initAuthUI(
   button: HTMLButtonElement,
-  status: HTMLParagraphElement
+  status: HTMLParagraphElement,
+  whatHappened: HTMLDivElement
 ) {
   await initCsrf();
-  checkAuth(button, status);
+  checkAuth(button, status, whatHappened);
 }
 
 async function initCsrf() {
@@ -16,7 +19,11 @@ async function initCsrf() {
   })
 }
 
-function checkAuth(button: HTMLButtonElement, status: HTMLParagraphElement) {
+function checkAuth(
+  button: HTMLButtonElement,
+  status: HTMLParagraphElement,
+  whatHappened: HTMLDivElement
+) {
   fetch(`${API_URL}/user/`, { credentials: "include" })
     .then(res => {
       if (res.status === 401) {
@@ -31,6 +38,7 @@ function checkAuth(button: HTMLButtonElement, status: HTMLParagraphElement) {
     .then(user => {
       if (user) {
         renderLoggedIn(button, status, user.username)
+        whatHappened.replaceChildren(renderWhatHappened(user.username))
       }
     })
     .catch(console.error)

@@ -10,10 +10,13 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <div class="card">
       <button id="auth-btn" type="button"></button>
     </div>
+
+    <div id="what-happened"></div>
   </div>
 `
 
 initAuthUI(
   document.querySelector<HTMLButtonElement>('#auth-btn')!,
-  document.querySelector<HTMLParagraphElement>('#status')!
+  document.querySelector<HTMLParagraphElement>('#status')!,
+  document.querySelector<HTMLDivElement>('#what-happened')!
 )
